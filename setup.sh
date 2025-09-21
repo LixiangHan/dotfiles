@@ -1,13 +1,13 @@
 #!/bin/bash
 echo "Install vim configuration..."
 
-cd ~/.vim
+cd ~/dotfiles
 
 if [ -f "$HOME/.vimrc" ]; then
 	mv ~/.vimrc ~/.vimrc.`date +%Y%m%d`
 fi
 
-ln -s ~/.vim/vimrc ~/.vimrc
+ln -s ~/dotfiles/vimrc ~/.vimrc
 
 git submodule init
 git submodule update

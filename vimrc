@@ -19,7 +19,7 @@ set noerrorbells
 set visualbell
 set autoread
 set autowrite
-set rtp+=~/.vim/bundle/vundle
+set rtp+=~/dotfiles/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'The-NERD-tree'     
