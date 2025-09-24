@@ -74,7 +74,3 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 autocmd VimEnter * Tagbar
 
 let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=#dadada
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=#dadada
-let g:indent_guides_guide_size=1
