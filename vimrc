@@ -1,90 +1,80 @@
-set number
+set nocompatible
 syntax on
+set showmode
+set showcmd
+set mouse=a
 set encoding=utf-8
-filetype indent on
-set autoindent
+set t_Co=256
+set smartindent
 set tabstop=4
 set shiftwidth=4
+set expandtab
+set softtabstop=4
+set number
+set relativenumber
 set cursorline
-set textwidth=80
-set wrap
-set linebreak
-set wrapmargin=2
+set cursorcolumn
+set laststatus=2
 set ruler
 set showmatch
 set hlsearch
 set incsearch
+set ignorecase
 set smartcase
+set spell spelllang=en_us
+set undofile
 set noerrorbells
 set visualbell
+set history=1000
 set autoread
-set autowrite
+set listchars=tab:»■,trail:■
+set list
+set scrolloff=5
+set splitright
+set splitbelow
+set confirm
+set wildmenu
+set wildmode=longest:list,full
+
+nnoremap <f5> :!ctags -R --fields=+iaS --extra=+q *<CR>
+nnoremap <f2> :NERDTreeToggle<CR>
+nnoremap <f3> :Tagbar<CR>
+
+filetype off
+
 set rtp+=~/dotfiles/bundle/vundle
-call vundle#rc()
-Bundle 'gmarik/vundle'
-Bundle 'The-NERD-tree'     
-Bundle 'AutoClose'            
-Bundle 'prabirshrestha/vim-lsp'
-Bundle 'mattn/vim-lsp-settings'
-Bundle 'prabirshrestha/asyncomplete.vim'
-Bundle 'prabirshrestha/asyncomplete-lsp.vim'
+call vundle#begin()
 
-map <F2> :NERDTreeToggle<CR>
-map <F3> :LspInstallServer<CR>
+Plugin 'VundleVim/Vundle.vim'
 
-let g:lsp_diagnostics_echo_cursor = 1 
-let g:lsp_diagnostics_float_cursor = 1 
-let g:lsp_diagnostics_signs_enabled = 1 
-let g:lsp_diagnostics_signs_error = {'text': '✗'}
-let g:lsp_diagnostics_signs_warning = {'text': '⚠'}
-let g:lsp_diagnostics_signs_information = {'text': 'i'}
-let g:lsp_diagnostics_signs_hint = {'text': '?'}
+Plugin 'davidhalter/jedi-vim'
 
-let g:lsp_auto_enable = 1
+Plugin 'jiangmiao/auto-pairs'
 
-if executable('pylsp')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pylsp',
-        \ 'cmd': {server_info->['pylsp']},
-        \ 'allowlist': ['python'],
-        \ })
-endif
+Plugin 'bling/vim-bufferline'
 
-if executable('clangd')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'clangd',
-        \ 'cmd': {server_info->['clangd']},
-        \ 'allowlist': ['c', 'cpp', 'objc', 'objcpp'],
-        \ })
-endif
+Plugin 'nanotech/jellybeans.vim'
 
-filetype plugin on
-set completeopt=menuone,noinsert,noselect
+Plugin 'preservim/nerdtree'
 
-function! s:on_lsp_buffer_enabled() abort
-    " 设置补全函数
-    setlocal omnifunc=lsp#complete
+Plugin 'preservim/tagbar'
 
-    " 导航映射
-    nmap <buffer> gd <plug>(lsp-definition) " 跳转到定义
-    nmap <buffer> gr <plug>(lsp-references) " 查找引用
-    nmap <buffer> gi <plug>(lsp-implementation) " 跳转到实现
-    nmap <buffer> gt <plug>(lsp-type-definition) " 跳转到类型定义
-    nmap <buffer> <leader>rn <plug>(lsp-rename) " 重命名符号
-    nmap <buffer> [g <plug>(lsp-previous-diagnostic) " 上一个错误
-    nmap <buffer> ]g <plug>(lsp-next-diagnostic) " 下一个错误
-    nmap <buffer> K <plug>(lsp-hover) " 悬停查看文档
+Plugin 'nathanaelkane/vim-indent-guides'
 
-    " 命令映射
-    command! -buffer LspCodeAction call lsp#ui#vim#code_action()
-    command! -buffer LspDocumentDiagnostics call lsp#ui#vim#document_diagnostics()
-    command! -buffer LspWorkspaceDiagnostics call lsp#ui#vim#workspace_diagnostics()
-    command! -buffer LspDocumentFormat call lsp#ui#vim#document_format() " 格式化文档
-endfunction
+call vundle#end()
 
-augroup vim_lsp_autocompletion
-    autocmd!
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
+filetype plugin indent on
 
+colorscheme jellybeans
 
+let g:NERDTreeFileLines = 1
+
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+autocmd VimEnter * Tagbar
+
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=#dadada
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=#dadada
+let g:indent_guides_guide_size=1

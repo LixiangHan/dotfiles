@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Install vim configuration..."
+echo "Setup Vim"
 
 cd ~/dotfiles
 
@@ -9,8 +9,5 @@ fi
 
 ln -s ~/dotfiles/vimrc ~/.vimrc
 
-git submodule init
-git submodule update
-
-vi +BundleInstall! +qall
+vim +BundleInstall! +qall
 
