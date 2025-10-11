@@ -61,6 +61,8 @@ Plugin 'preservim/tagbar'
 
 Plugin 'nathanaelkane/vim-indent-guides'
 
+Plugin 'dominikduda/vim_current_word'
+
 call vundle#end()
 
 filetype plugin indent on
@@ -71,6 +73,10 @@ let g:NERDTreeFileLines = 1
 
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
-autocmd VimEnter * Tagbar
+autocmd VimEnter * Tagbar VimCurrentWordToggle
 
 let g:indent_guides_enable_on_vim_startup = 1
+
+" Highlight the word under the cursor
+let g:vim_current_word#highlight_current_word = 1
+let g:vim_current_word#highlight_delay = 0
