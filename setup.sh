@@ -11,3 +11,5 @@ ln -s ~/dotfiles/vimrc ~/.vimrc
 
 vim +BundleInstall! +qall
 
+# necessary for python syntax check
+sudo apt-get install pylint

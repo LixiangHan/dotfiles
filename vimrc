@@ -63,6 +63,8 @@ Plugin 'nathanaelkane/vim-indent-guides'
 
 Plugin 'dominikduda/vim_current_word'
 
+Plugin 'vim-syntastic/syntastic'
+
 call vundle#end()
 
 filetype plugin indent on
@@ -80,3 +82,20 @@ let g:indent_guides_enable_on_vim_startup = 1
 " Highlight the word under the cursor
 let g:vim_current_word#highlight_current_word = 1
 let g:vim_current_word#highlight_delay = 0
+
+" Syntax Check
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_style_error_symbol = '➤'
+let g:syntastic_style_warning_symbol = '➤'
+let g:syntastic_stl_format = 0
+highlight link SyntasticErrorSign Error
+highlight link SyntasticWarningSign Todo
