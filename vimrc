@@ -75,7 +75,7 @@ let g:NERDTreeFileLines = 1
 
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
-autocmd VimEnter * Tagbar VimCurrentWordToggle
+autocmd VimEnter * VimCurrentWordToggle
 
 let g:indent_guides_enable_on_vim_startup = 1
 
