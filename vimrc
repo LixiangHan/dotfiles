@@ -61,7 +61,7 @@ Plugin 'preservim/tagbar'
 
 Plugin 'nathanaelkane/vim-indent-guides'
 
-Plugin 'vim-syntastic/syntastic'
+Plugin 'dense-analysis/ale'
 
 call vundle#end()
 
@@ -79,18 +79,18 @@ autocmd CursorHold * exe 'match Search /\V\<' . expand('<cword>') . '\>/'
 let g:indent_guides_enable_on_vim_startup = 1
 
 " Syntax Check
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_python_checkers = ['pylint']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_style_error_symbol = '➤'
-let g:syntastic_style_warning_symbol = '➤'
-let g:syntastic_stl_format = 0
-highlight link SyntasticErrorSign Error
-highlight link SyntasticWarningSign Todo
+let g:ale_linters = {
+\   'python': ['flake8', 'pylint'],
+\   'cpp': ['clangtidy', 'cppcheck'],
+\   'sh': ['shellcheck'],
+\}
+let g:ale_enabled = 1
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 0
